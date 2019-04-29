@@ -1,256 +1,1023 @@
-<?php
-//session_start();
-//include_once 'config.php';
-//判断UA
-if(!isMobile()){header("Location: http://www.baidu.com");}
-
-function isMobile() { 
-  // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
-  if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) {
-    return true;
-  } 
-  // 如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
-  if (isset($_SERVER['HTTP_VIA'])) { 
-    // 找不到为flase,否则为true
-    return stristr($_SERVER['HTTP_VIA'], "wap") ? true : false;
-  } 
-  // 脑残法，判断手机发送的客户端标志,兼容性有待提高。其中'MicroMessenger'是电脑微信
-  if (isset($_SERVER['HTTP_USER_AGENT'])) {
-    $clientkeywords = array('nokia','sony','ericsson','mot','samsung','htc','sgh','lg','sharp','sie-','philips','panasonic','alcatel','lenovo','iphone','ipod','blackberry','meizu','android','netfront','symbian','ucweb','windowsce','palm','operamini','operamobi','openwave','nexusone','cldc','midp','wap','mobile','MicroMessenger'); 
-    // 从HTTP_USER_AGENT中查找手机浏览器的关键字
-    if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
-      return true;
-    } 
-  } 
-  // 协议法，因为有可能不准确，放到最后判断
-  if (isset ($_SERVER['HTTP_ACCEPT'])) { 
-    // 如果只支持wml并且不支持html那一定是移动设备
-    // 如果支持wml和html但是wml在html之前则是移动设备
-    if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
-      return true;
-    } 
-  } 
-  return false;
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  	 	<div id="whole_body" class="wo-main-body wo-mode-visitor"> 
+   <meta charset="UTF-8"> 
+   <meta name="viewport" content="width=device-width; initial-scale=1.0;" id="mixia_vpid"> 
+   <style type="text/css">
+  <style>body {
+  	
+ 
+{ font-size:12px; line-height:0px;background-color:#FCFCFC;}
+.middel {
+	text-align:center;
+margin:auto;
+}
+.rowtop1{ 
+ 	line-height:1px;
+	height:2px;
+	width:95%;
+	color:#55A800;
+	background-color:#55A800;
+	font-size:16px;
+	font-weight:550;
+	font-family:Arial;
+	border:0px solid #dcdcdc;
+	-webkit-border-top-left-radius:3px;
+	-moz-border-radius-topleft:3px;
+	border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topright:3px;
+	border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-moz-border-radius-bottomleft:3px;
+	border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	-moz-border-radius-bottomright:3px;
+	border-bottom-right-radius:3px;
+	-moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+	-webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+	box-shadow: inset 0px 0px 0px 0px #ffffff;
+	text-align:center;
+	display:inline-block;
+	text-decoration:none;
+	margin-bottom:20px;
+	
+}
+.rowtop1:hover {
+	background-color:#55A800;
 }
 
-// 电影文件名称，不含尾缀
-$videodata = [1 => '', 2 => '', 3 => '', 4 => '', 5 => '', 6 => '', 7 => '', 8 => ''];
 
-// 文件名称
-$filepath = "data/" . array_rand($videodata) . '.txt';
 
-$videoinfo = file_get_contents($filepath);
-$videolist = explode("\r\n", $videoinfo);
+.rowtop{
+  line-height:50px;
+  height:50px;
+  width:100px;
+  color:#017577;
+  background-color:#ededed;
+  font-size:15px;
+  font-weight:550;
+  font-family:Arial;
+  background:-webkit-gradient(linear, left top, left bottom, color-start(0.05, #ededed), color-stop(1, #f5f5f5));
+  background:-moz-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+  background:-o-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+  background:-ms-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+  background:linear-gradient(to bottom, #ededed 5%, #f5f5f5 100%);
+  background:-webkit-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#f5f5f5',GradientType=0);
+  border:1px solid #dcdcdc;
+  -webkit-border-top-left-radius:6px;
+  -moz-border-radius-topleft:6px;
+  border-top-left-radius:6px;
+  -webkit-border-top-right-radius:6px;
+  -moz-border-radius-topright:6px;
+  border-top-right-radius:6px;
+  -webkit-border-bottom-left-radius:6px;
+  -moz-border-radius-bottomleft:6px;
+  border-bottom-left-radius:6px;
+  -webkit-border-bottom-right-radius:6px;
+  -moz-border-radius-bottomright:6px;
+  border-bottom-right-radius:6px;
+  -moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+  -webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+  box-shadow: inset 0px 0px 0px 0px #ffffff;
+  text-align:center;
+  display:inline-block;
+  text-decoration:none;
+  margin-bottom:10px;
+}
+.rowtop:hover{
+  background-color:#f5f5f5;
+  background:-webkit-gradient(linear,center bottom, left top, left bottom, color-start(0.05, #f5f5f5), color-stop(1, #ededed));
+  background:-moz-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+  background:-o-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+  background:-ms-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+  background:linear-gradient(to bottom, #f5f5f5 5%, #ededed 100%);
+  background:-webkit-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#ededed',GradientType=0);
+}
 
-$vi = array_rand($videolist);
+  	
+  	
+  	
+  	
+  background: radial-gradient(#c7bdcb, #673d72, #070b18) no-repeat fixed;
+}
 
-/*$approved = $_SESSION['approved'];
-if (!$approved) {
-    exit(header('Location: link.php'));
-}*/
-$tit = date('m月d日')."精品推荐";
+.stars-container {
+  position: absolute;
+  left: 5%;
+  top: 8%;
+  width: 90vw;
+  height: 38vh;
+}
 
-?>
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title><?php echo $tit;?>智云影音</title>
-  <meta name="keywords" content="在线精品福利视频，随机福利视频" />
-  <meta name="description" content="智云影音精品资源，随机福利精品视频" />
-  <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="./ckplayer/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="./ckplayer/ckplayer.js" charset="utf-8"></script>
-  <script type="text/javascript">eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('b a(){0 6=1.2("9").4;0 5=1.2("3");0 3=1.2("3").c;0 8=5.e[3].4;0 7=1.2("f");7.d=8+6}',16,16,'var|document|getElementById|jk|value|jkurl|diz|cljurl|jkv|url|dihejk|function|selectedIndex|src|options|player'.split('|'),0,{}))</script>
-  <!--[if lt IE 9]>
-<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-<script src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
-<![endif]--></head>
-<body>
-<nav class="navbar navbar-fixed-top navbar-default">
-<div class="container">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="/">随机精品福利视频资源</a>
-</div>
-<div id="navbar" class="collapse navbar-collapse">
-<ul class="nav navbar-nav navbar-nav">
-<li><a href="/"><span class="glyphicon glyphicon-list"></span>官方发布</a></li>
-<li><a href=""><span class="glyphicon glyphicon-list"></span> 官方最新发布</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-<li><a href=""><span class="glyphicon glyphicon-envelope"></span>等待添加</a></li>
-</div>
-</div>
-</nav> <br />
-</head>
-  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 center-block" style="float: none;">
-  <h3 class="text-muted" align="center">随机福利视频</h3>
-<hr>
-	<table class="table table-bordered">
-	<tbody>
-	   <div class="col-md-14 column">
-    <div class="panel panel-default">
-     <div id="kj" class="panel-body">
-<div style="text-align: center;width: 100%;margin:0 auto">
-    <div id="a1" style=""></div>
-</div>
+.star {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  -webkit-filter: blur(6px);
+          filter: blur(6px);
+  background-color: white;
+}
+.star.star-1 {
+  top: 10%;
+  left: 20%;
+  -webkit-animation: pulsing-star 1.8s 300ms infinite;
+          animation: pulsing-star 1.8s 300ms infinite;
+}
+.star.star-2 {
+  top: 35%;
+  left: 30%;
+  width: 0.5rem;
+  height: 0.5rem;
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
+}
+.star.star-3 {
+  top: 12%;
+  left: 63%;
+  width: 0.8rem;
+  height: 0.8rem;
+  -webkit-animation: pulsing-star 1.6s 400ms infinite;
+          animation: pulsing-star 1.6s 400ms infinite;
+}
+.star.star-4 {
+  top: 22%;
+  left: 80%;
+  width: 0.4rem;
+  height: 0.4rem;
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
+}
+.star.star-5 {
+  left: 53%;
+  bottom: 5%;
+  width: 0.3rem;
+  height: 0.3rem;
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+.star.star-6 {
+  left: 12%;
+  top: 45%;
+  width: 0.6rem;
+  height: 0.6rem;
+  -webkit-animation: pulsing-star 1.8s infinite;
+          animation: pulsing-star 1.8s infinite;
+}
+.star.star-7 {
+  left: 39%;
+  top: 3%;
+  width: 0.7rem;
+  height: 0.7rem;
+  -webkit-animation: pulsing-star 2s 100ms infinite;
+          animation: pulsing-star 2s 100ms infinite;
+}
+.star.star-8 {
+  left: 73%;
+  bottom: 19%;
+  width: 0.2rem;
+  height: 0.2rem;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.star.star-9 {
+  left: 6%;
+  width: 0.2rem;
+  height: 0.2rem;
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+.star.star-10 {
+  left: 90%;
+  top: 25%;
+  -webkit-filter: blur(8px);
+          filter: blur(8px);
+  -webkit-animation: pulsing-star 1.9s infinite ease-out;
+          animation: pulsing-star 1.9s infinite ease-out;
+}
+
+@-webkit-keyframes pulsing-star {
+  5% {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  30% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes pulsing-star {
+  5% {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  30% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+.naru-container {
+  position: relative;
+  width: 35rem;
+  height: 35rem;
+  margin: 8% auto 0;
+}
+
+.log {
+  position: absolute;
+  top: 63%;
+  left: -15%;
+  width: 50rem;
+  height: 9rem;
+  border-radius: 15%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8b5d5b), color-stop(black), to(#3e2929));
+  background: linear-gradient(#8b5d5b, black, #3e2929);
+}
+
+.log-end {
+  position: absolute;
+  top: 20%;
+  width: 0.8rem;
+  height: 6rem;
+  background-color: red;
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 100px;
+  background-color: #634241;
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+.log-end.log-end-right {
+  left: 98%;
+  top: 13%;
+  height: 6.7rem;
+  background-color: #6c4847;
+}
+
+.moss-patch {
+  position: absolute;
+  top: 20%;
+  left: 80%;
+  width: 6rem;
+  height: 1rem;
+  border-radius: 50%;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.moss-patch.second-patch {
+  top: 26%;
+  left: 80%;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.moss-patch .main-moss {
+  position: absolute;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  background-color: #5a7759;
+}
+.moss-patch .main-moss.moss-1 {
+  width: 0.8rem;
+  height: 0.8rem;
+  left: 40%;
+  background-color: #658564;
+}
+.moss-patch .main-moss.moss-2 {
+  left: 30%;
+}
+.moss-patch .main-moss.moss-3 {
+  width: 0.8rem;
+  height: 0.8rem;
+  left: 25%;
+  top: 2%;
+}
+.moss-patch .main-moss.moss-4 {
+  left: 20%;
+  top: 1%;
+  background-color: #4f684e;
+}
+.moss-patch .main-moss.moss-5 {
+  left: 8%;
+}
+
+.mushroom {
+  position: absolute;
+  width: 7rem;
+  height: 3rem;
+}
+.mushroom .mushroom-cap {
+  position: absolute;
+  bottom: 80%;
+  left: 30%;
+  width: 1rem;
+  height: 2rem;
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 100px;
+  background-color: #9894c3;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.mushroom .mushroom-cap.middle-cap {
+  left: 90%;
+  bottom: 33%;
+}
+.mushroom .mushroom-cap.last-cap {
+  left: -23%;
+  top: 15%;
+  -webkit-transform: rotate(220deg);
+          transform: rotate(220deg);
+}
+.mushroom .mushroom-cap .mushroom-stem {
+  position: absolute;
+  top: 36%;
+  right: 92%;
+  width: 1.4rem;
+  height: 0.5rem;
+  border-radius: 35%;
+  background-color: #5c569b;
+}
+
+.naru-body {
+  position: absolute;
+  top: 22%;
+  left: 22%;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 100px 200px 300px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background-color: #291a12;
+}
+
+.naru-hair {
+  position: absolute;
+  top: 5%;
+  width: 0;
+  height: 0;
+  border-left: 1.1rem solid transparent;
+  border-right: 1.1rem solid transparent;
+  border-bottom: 1.1rem solid #3b251a;
+  -webkit-transform: rotate(10deg) skewX(-50deg);
+          transform: rotate(10deg) skewX(-50deg);
+  border-radius: 50px;
+  -webkit-box-shadow: 12px 11px 20px #7cccf6;
+          box-shadow: 12px 11px 20px #7cccf6;
+  opacity: 0.9;
+}
+.naru-hair.spike-2 {
+  left: 4%;
+  top: 0%;
+}
+.naru-hair.spike-3 {
+  left: 19%;
+  top: -4%;
+}
+.naru-hair.spike-4 {
+  left: -2%;
+  top: 16%;
+}
+.naru-hair.left-spike-arm {
+  left: -6%;
+  top: 65%;
+  -webkit-transform: rotate(110deg);
+          transform: rotate(110deg);
+  -webkit-box-shadow: 13px -17px 26px #7cccf6;
+          box-shadow: 13px -17px 26px #7cccf6;
+}
+.naru-hair.left-spike-arm.spike-6 {
+  left: -4%;
+  top: 69%;
+}
+.naru-hair.spike-arm {
+  left: 89%;
+  top: 16%;
+  -webkit-box-shadow: -1px 14px 25px #7cccf6;
+          box-shadow: -1px 14px 25px #7cccf6;
+  -webkit-transform: rotate(-11deg);
+          transform: rotate(-11deg);
+}
+
+.naru-face {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 200px 50px;
+  background-color: #d3f6ff;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.naru-face.naru-face-copy {
+  top: 10%;
+  left: 15%;
+  background-color: #64c3f5;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 25%;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  opacity: 0.9;
+}
+
+.naru-face-glow {
+  position: absolute;
+  top: 21%;
+  left: 28%;
+  width: 2rem;
+  height: 3rem;
+  border-radius: 200px 50px;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+  background: radial-gradient(circle at center, #1dbde5, #291a12 100%);
+  -webkit-filter: blur(14px);
+          filter: blur(14px);
+}
+
+.naru-eye {
+  position: absolute;
+  top: 25%;
+  left: 13%;
+  width: 0.8rem;
+  height: 0.45rem;
+  border-radius: 100px/50px;
+  -webkit-transform: rotate(-30deg);
+          transform: rotate(-30deg);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  background-color: #291a12;
+}
+.naru-eye.naru-right-eye {
+  top: 10%;
+  left: 27%;
+  -webkit-transform: rotate(120deg);
+          transform: rotate(120deg);
+}
+
+.naru-eye-reflect {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 50%;
+  background-color: #dcf1fd;
+  opacity: 0.8;
+}
+.naru-eye-reflect.naru-right-eye-reflect {
+  top: 0%;
+  left: 40%;
+}
+
+.naru-mouth {
+  position: absolute;
+  top: 19%;
+  left: 22%;
+  width: 1.3rem;
+  height: 0.1rem;
+  border: 3px solid;
+  border-radius: 50%;
+  -webkit-transform: rotate(310deg);
+          transform: rotate(310deg);
+  border-color: transparent transparent #291a12;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.naru-belly {
+  position: absolute;
+  top: 38%;
+  left: 35%;
+  height: 8rem;
+  width: 11rem;
+  border-radius: 100px 0px;
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
+  background: radial-gradient(circle at center, #1dbde5, #291a12 100%);
+  -webkit-filter: blur(15px);
+          filter: blur(15px);
+}
+
+.naru-shoulder-shadow {
+  position: absolute;
+  left: 20%;
+  top: 34%;
+  width: 8rem;
+  height: 4rem;
+  border-radius: 100px 40px;
+  -webkit-transform: rotate(1230deg);
+          transform: rotate(1230deg);
+  background-color: #291a12;
+  -webkit-filter: blur(6px);
+          filter: blur(6px);
+  z-index: 2;
+}
+.naru-shoulder-shadow.reflect-shoulder-shadow {
+  -webkit-transform: rotate(240deg);
+          transform: rotate(240deg);
+  left: 53%;
+  -webkit-filter: blur(15px);
+          filter: blur(15px);
+  background: -webkit-gradient(linear, left top, left bottom, from(#1dbde5), to(#060403));
+  background: linear-gradient(#1dbde5, #060403);
+  z-index: 0;
+}
+
+.naru-forearm {
+  position: absolute;
+  left: 18%;
+  top: 45%;
+  width: 9rem;
+  height: 3.5rem;
+  border-radius: 100px 40px;
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+  background: radial-gradient(#1f130d 50%, #935e41);
+  z-index: 1;
+}
+.naru-forearm.right-forearm {
+  top: 53%;
+  -webkit-transform: rotate(-10deg) translateX(190px);
+          transform: rotate(-10deg) translateX(190px);
+}
+
+.naru-finger {
+  position: absolute;
+  background-color: #422a1d;
+  width: 2rem;
+  height: 1.1rem;
+  bottom: 50%;
+  left: 38%;
+  border-radius: 100px 40px;
+  -webkit-transform: rotate(-20deg);
+          transform: rotate(-20deg);
+  z-index: 3;
+}
+.naru-finger.naru-right-finger {
+  left: 50%;
+  bottom: 46%;
+  height: 0.7rem;
+  width: 1.5rem;
+  border-radius: 0px 10px;
+  -webkit-transform: rotate(-35deg);
+          transform: rotate(-35deg);
+  background-color: #4db9f3;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.naru-finger-line {
+  position: absolute;
+  background-color: #291a12;
+  width: 1.2rem;
+  height: 0.1rem;
+  border: 1px solid;
+  border-radius: 50%;
+  bottom: 45%;
+  left: 39%;
+  -webkit-box-shadow: -5px 2px 6px #d3ae9a;
+          box-shadow: -5px 2px 6px #d3ae9a;
+  -webkit-transform: rotate(-20deg);
+          transform: rotate(-20deg);
+  border-color: transparent;
+  z-index: 1;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  opacity: 0.5;
+}
+.naru-finger-line.top-finger-line {
+  bottom: 47%;
+  left: 40%;
+}
+.naru-finger-line.naru-right-finger-line {
+  bottom: 44%;
+  left: 52%;
+  width: 2rem;
+}
+.naru-finger-line.naru-top-right-finger-line {
+  left: 52%;
+  bottom: 48%;
+  width: 2rem;
+  -webkit-transform: rotate(-40deg);
+          transform: rotate(-40deg);
+}
+
+.naru-elbow-highlight {
+  position: absolute;
+  left: 63%;
+  bottom: 16%;
+  width: 2.5rem;
+  height: 4rem;
+  -webkit-transform: rotate(80deg);
+          transform: rotate(80deg);
+  border-radius: 50%;
+  -webkit-filter: blur(7px);
+          filter: blur(7px);
+  background: -webkit-gradient(linear, left top, right top, from(#1dbde5), to(#060403));
+  background: linear-gradient(left, #1dbde5, #060403);
+}
+
+.naru-thigh {
+  position: absolute;
+  width: 6.2rem;
+  height: 4.2rem;
+  left: 55%;
+  top: 60%;
+  border-radius: 50% 30%;
+  -webkit-transform: rotate(120deg);
+          transform: rotate(120deg);
+  background: radial-gradient(ellipse, #291a12 50%, #1dbde5 150%);
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+.naru-thigh.left-thigh {
+  left: 24%;
+  top: 59%;
+  -webkit-transform: rotate(60deg);
+          transform: rotate(60deg);
+}
+
+.naru-leg {
+  position: absolute;
+  top: 65%;
+  left: 54%;
+  width: 6.3rem;
+  height: 6rem;
+  -webkit-clip-path: polygon(71% 17%, 23% 17%, 27% 69%, 44% 95%, 63% 71%);
+          clip-path: polygon(71% 17%, 23% 17%, 27% 69%, 44% 95%, 63% 71%);
+  -webkit-transform: rotate(15deg);
+          transform: rotate(15deg);
+  background-color: #291a12;
+}
+.naru-leg.left-leg {
+  left: 29%;
+  -webkit-transform: rotate(-27deg);
+          transform: rotate(-27deg);
+}
+
+.naru-foot {
+  position: absolute;
+  top: 75%;
+  left: 59%;
+  width: 2rem;
+  height: 4rem;
+  border-radius: 30px 30px 70px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#291a12), to(#935e41));
+  background: linear-gradient(#291a12, #935e41);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.naru-foot.left-foot {
+  left: 35%;
+  -webkit-transform: rotateY(170deg);
+          transform: rotateY(170deg);
+}
+
+.naru-toe-line {
+  position: absolute;
+  top: 85%;
+  left: 10%;
+  width: 1rem;
+  height: 0.1rem;
+  border: 1px solid;
+  border-radius: 50%;
+  -webkit-transform: rotate(290deg);
+          transform: rotate(290deg);
+  border-color: transparent transparent #291a12;
+}
+
+.ori-container {
+  position: relative;
+  top: 38%;
+  width: 18rem;
+  height: 8rem;
+  margin: 8% auto 0;
+}
+
+.ori-body {
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  width: 6rem;
+  height: 3.7rem;
+  border-radius: 50%;
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+  background: -webkit-gradient(linear, left top, left bottom, from(#f4fbfe), to(#26abf0));
+  background: linear-gradient(#f4fbfe, #26abf0);
+}
+
+.ori-arm {
+  position: absolute;
+  left: 45%;
+  top: 25%;
+  width: 1.5rem;
+  height: 3rem;
+  border-radius: 100px/70px;
+  -webkit-transform: rotate(-40deg);
+          transform: rotate(-40deg);
+  -webkit-box-shadow: -1px 2px 3px #0e8acc;
+          box-shadow: -1px 2px 3px #0e8acc;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f4fbfe), to(#64c3f5));
+  background: linear-gradient(#f4fbfe, #64c3f5);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.ori-ear {
+  position: absolute;
+  bottom: 80%;
+  left: 60%;
+  width: 1.3rem;
+  height: 4rem;
+  border-radius: 500px 10px 90px 500px;
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
+  background: -webkit-gradient(linear, left top, left bottom, from(#f4fbfe), to(#94d5f8));
+  background: linear-gradient(#f4fbfe, #94d5f8);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.ori-ear.front-ear {
+  bottom: 55%;
+  left: 82%;
+  -webkit-transform: rotate(201deg);
+          transform: rotate(201deg);
+}
+
+.ori-head {
+  position: absolute;
+  left: 55%;
+  width: 5rem;
+  height: 4rem;
+  border-radius: 50%;
+  -webkit-transform: rotate(-20deg);
+          transform: rotate(-20deg);
+  background: radial-gradient(white, #acdff9 60%);
+}
+
+.ori-hair {
+  position: absolute;
+  left: 69%;
+  bottom: 90%;
+  width: 0.5rem;
+  height: 3rem;
+  border-radius: 50px 0px;
+  -webkit-transform: rotate(20deg);
+          transform: rotate(20deg);
+  background-color: #dcf1fd;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.ori-hair.right-hair {
+  bottom: 80%;
+  left: 75%;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+}
+
+.ori-eye {
+  position: absolute;
+  height: 0.6rem;
+  top: 20%;
+  left: 15%;
+  border: 1px solid #095a84;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+.ori-eye.ori-right-eye {
+  height: 0.8rem;
+  left: 45%;
+  top: 50%;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.ori-nose {
+  position: absolute;
+  top: 45%;
+  left: 9%;
+  width: 0.4rem;
+  height: 0.8rem;
+  border-radius: 100px/150px;
+  -webkit-transform: rotate(140deg);
+          transform: rotate(140deg);
+  -webkit-filter: blur(1.5px);
+          filter: blur(1.5px);
+  background-color: #64c3f5;
+}
+
+.ori-tail {
+  position: absolute;
+  left: 6%;
+  top: 30%;
+  width: 4rem;
+  height: 5rem;
+  border-radius: 500px;
+  border: 1rem solid;
+  border-color: #c4e8fb transparent transparent;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  z-index: 2;
+}
+.ori-tail .tail-tip {
+  position: absolute;
+  top: -3%;
+  right: 85%;
+  width: 1rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: #c4e8fb;
+}
+</style>
+ </HEAD>
+
+ <BODY>
+
+
+ <div class="middel"> 
+	         
 <br>
-<div style="text-align: center;width: 100%;margin:0 auto">
-    <div id="a2" style=""></div>
+    <a href="#"><h3>简洁好用</h3></a><br/>
+    <h1>视频导航</h1> 
+  
+          <br>
+ 
+   <a href="https://m.huya.com/g/2135" class="rowtop">虎牙电影轮播</a> 
+  <a href="https://m.douyu.com/" class="rowtop">斗鱼直播</a> 
+  <a href="https://chushou.tv/m-home.htm" class="rowtop">触手直播</a> 	       
+ <a href="http://m.360kan.com/list/dianying" class="rowtop">360影视</a> 
+    <a href="http://m.kan.sogou.com/" class="rowtop">搜狗影视</a> 
+   <a href="http://v.sigu.me/" class="rowtop">思古影视</a> 
+   <a href="http://gv.ss82.pw/" class="rowtop">AD影视</a> 
+    <a href="https://m.kankanwu.com/" class="rowtop">看看屋</a> 
+    <a href="http://m.nicedianying.com/" class="rowtop">GOOD电影网</a> 
+    <a href="https://www.fy-sys.cn/" class="rowtop">方圆实验室</a> 
+    <a href="http://t.dtjos.com/" class="rowtop">云友影视</a> 
+ <a href="http://www.52xsba.com/" class="rowtop">５２影院</a> 
+    <a href="https://7k.yixiangyh.com/" class="rowtop">7K影院</a> 
+    <a href="http://m.4ktv8.com/" class="rowtop">影兔视频</a> 
+   <a href="http://m.tv.sohu.com" class="rowtop">搜狐视频</a> 
+    <a href="http://m.mgtv.com/#/channel/home" class="rowtop">芒果TV</a> 
+  <a href="http://vip.1905.com" class="rowtop">1905影院</a> 
+    <a href="http://m.baofeng.com" class="rowtop">暴风影音</a> 
+   <a href="http://m.bilibili.com" class="rowtop">哔哩哔哩</a> 
+    <a href="http://m.ku6.com" class="rowtop">酷6视频</a> 
+  <a href="https://film.qq.com/weixin/all.html?univ_id=&univ_name" class="rowtop">腾讯视频</a>   
+    <a href="https://www.youku.com/" class="rowtop">优酷视频</a>
+	  <a href="   http://m.iqiyi.com/lib/dianying  " class="rowtop">IQY视频</a>      
+	   <a href="https://www.youku.com/" class="rowtop">优酷视频</a>
+	       
+   </div> 
+   <style>
+<p>
+</p>
+
+
+	<br/>;
+
+<!--content body-->
+
+
+</style>
+  </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+<div class="stars-container">
+  <div class="star star-1"></div>
+  <div class="star star-2"></div>
+  <div class="star star-3"></div>
+  <div class="star star-4"></div>
+  <div class="star star-5"></div>
+  <div class="star star-6"></div>
+  <div class="star star-7"></div>
+  <div class="star star-8"></div>
+  <div class="star star-9"></div>
+  <div class="star star-10"></div>
 </div>
-<br>
-<div style="text-align: center;width: 100%;margin:0 auto">
-    <div id="a3" style=""></div>
-</div>
-<br>
-<div style="text-align: center;width: 100%;margin:0 auto">
-    <div id="a4" style=""></div>
-</div>
-<br>
-
-<script type="text/javascript">
-    var vid_1 = '<?=$videolist[$vi];?>';
-    var _width = '100%';
-    var _height = '580px';
-
-    function ckXplay() {
-        $('#a1').attr("style", "width:" + _width + ';height:' + _height + ';');
-        var videoObject = {
-            container: '#a1',//“#”代表容器的ID，“.”或“”代表容器的class
-            variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
-            flashplayer: false,//如果强制使用flashplayer则设置成true
-            loop: true, //播放结束是否循环播放
-            autoplay: false, //是否自动播放
-            video: vid_1,//视频地址
-        };
-        var player = new ckplayer(videoObject);
-
-    }
-
-    ckXplay()
-
-</script>     </div>
+<div class="naru-container">
+  <div class="log">
+    <div class="log-end"></div>
+    <div class="log-end log-end-right"></div>
+    <div class="moss-patch">
+      <div class="main-moss"></div>
+      <div class="main-moss moss-1"></div>
+      <div class="main-moss moss-2"></div>
+      <div class="main-moss moss-3"></div>
+      <div class="main-moss moss-4"></div>
+      <div class="main-moss moss-5"></div>
     </div>
-   </div>
-		<tr>
-   <div class="col-md-14 column">
-    <form method="get" id="1233911832">
-     <div class="input-group" style="width: 100%;">
-
-     </div>
-     <br>
-     <div class="input-group" style="width: 100%;">      
-     </div>
-     <br>
-     <div>
-      <a href="javascript:location.reload()"><button id="bf" type="button" class="btn btn-success btn-lg btn-block" onclick="dihejk()">点击更换其他随机视频</button></a>
-      
-     
-     </div>
-    </form>
-   </div>
-		</tr>
-      </tbody>
-	  <!--换行-->
-          </table>
-		  	<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>使用介绍</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-            <td><b>
-<ol><h5><b>
-<li>刷新页面即可更换更新其他随机福利精品视频</li><br>
-<li>播放说明：刷新页面或点击刷新按钮即可更换其他随机精品福利视频！</li><br>
-
-<li>官方发布：更多精彩资源请添</li><br>
-
-</b></h5>
-</ol>
-			</b>
- </td>
-		</tr>
-      </tbody>
-	  <!--换行-->
-
-	  <font color=#0000CD>
-<marquee direction="left" behavior="scroll" scrollamount="10" bgcolor="" width=100% height="" scrolldelay="">
-公告：点击刷新页面即可更换其他精品福利视频，本服务使用完全免费！
-</marquee></font>
-<br><br>
-	  	  <!--换行-->
-          </table>
-<div class="panel-body" style="text-align: center;">
- <div class="container-fluid">
-  <a target="_blank" href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-up"></span>等待</a>
-  <a target="_blank" href="https://zhientry/455642" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>精品资源</a> 
- <button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-user"></span>  <a href="">合作加盟</a>
- </button> 
-<br><span class="copyright">Copyright &copy; 2020 智云影音.  <a href="http://z" target="_blank" title="##"> 随机福利视频资源网 </a></span>
+    <div class="moss-patch second-patch">
+      <div class="main-moss"></div>
+      <div class="main-moss moss-1"></div>
+      <div class="main-moss moss-2"></div>
+      <div class="main-moss moss-3"></div>
+      <div class="main-moss moss-4"></div>
+      <div class="main-moss moss-5"></div>
+    </div>
+    <div class="mushroom">
+      <div class="mushroom-cap">
+        <div class="mushroom-stem"></div>
+      </div>
+      <div class="mushroom-cap middle-cap">
+        <div class="mushroom-stem"></div>
+      </div>
+      <div class="mushroom-cap last-cap">
+        <div class="mushroom-stem"></div>
+      </div>
+    </div>
+  </div>
+  <div class="naru-body">
+    <div class="naru-hair"></div>
+    <div class="naru-hair spike-2"></div>
+    <div class="naru-hair spike-3"></div>
+    <div class="naru-hair spike-4"></div>
+    <div class="naru-hair spike-arm"></div>
+    <div class="naru-hair left-spike-arm"></div>
+    <div class="naru-hair left-spike-arm spike-6"></div>
+    <div class="naru-face"></div>
+    <div class="naru-face naru-face-copy"></div>
+    <div class="naru-face-glow"></div>
+    <div class="naru-eye">
+      <div class="naru-eye-reflect"></div>
+    </div>
+    <div class="naru-eye naru-right-eye">
+      <div class="naru-eye-reflect naru-right-eye-reflect"></div>
+    </div>
+    <div class="naru-mouth"></div>
+  </div>
+  <div class="naru-belly"></div>
+  <div class="naru-shoulder-shadow"></div>
+  <div class="naru-shoulder-shadow reflect-shoulder-shadow"></div>
+  <div class="naru-forearm"></div>
+  <div class="naru-finger-line top-finger-line"></div>
+  <div class="naru-finger-line"></div>
+  <div class="naru-finger"></div>
+  <div class="naru-forearm right-forearm">
+    <div class="naru-elbow-highlight"></div>
+  </div>
+  <div class="naru-finger naru-right-finger"></div>
+  <div class="naru-finger-line naru-top-right-finger-line"></div>
+  <div class="naru-finger-line naru-right-finger-line"></div>
+  <div class="naru-thigh"></div>
+  <div class="naru-leg"></div>
+  <div class="naru-foot">
+    <div class="naru-toe-line"></div>
+  </div>
+  <div class="naru-thigh left-thigh"></div>
+  <div class="naru-leg left-leg"></div>
+  <div class="naru-foot left-foot">
+    <div class="naru-toe-line"></div>
+  </div>
+  <div class="ori-container">
+    <div class="ori-body"></div>
+    <div class="ori-arm"></div>
+    <div class="ori-ear"></div>
+    <div class="ori-head">
+      <div class="ori-eye"></div>
+      <div class="ori-eye ori-right-eye"></div>
+      <div class="ori-nose"></div>
+    </div>
+    <div class="ori-ear front-ear"></div>
+    <div class="ori-hair"></div>
+    <div class="ori-hair right-hair"></div>
+    <div class="ori-tail">
+      <div class="tail-tip"></div>
+    </div>
+  </div>
 </div>
-       </div>
-       <!--百度收录自动推送-->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"www.xtxsz.ga","bdStyle":"0","bdSize":"32"},"slide":{"type":"slide","bdImg":"5","bdPos":"left","bdTop":"237.5"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"32"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-<!--百度自动提交连接-->
-        <script>
-            (function() {
-                var bp = document.createElement('script');
-                var curProtocol = window.location.protocol.split(':')[0];
-                if (curProtocol === 'https') {
-                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                } else {
-                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                }
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(bp, s);
-            })();
-        </script>
-        <!--/禁止右键-->
-  <script type="text/javascript">
-    //屏蔽鼠标右键
-    document.oncontextmenu = function () {
-        return false;
-    }
-    document.onkeydown = function () {
-        var e = window.event || arguments[0];
-        //屏蔽F12
-        if (e.keyCode == 123) {
-            return false;
-            //屏蔽Ctrl+Shift+I
-        } else if ((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)) {
-            return false;
-            //屏蔽Shift+F10
-        } else if ((e.shiftKey) && (e.keyCode == 121)) {
-            return false;
-        }
-    };
-</script>
-<script language="javascript" type="text/javascript" src="http://js.users.51.la/18759442.js"></script>
-<noscript><a href="http://www.51.la/?18759442" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/18759442.asp" style="border:none" /></a></noscript>
-</body>
-</html>
+     
+	
+ </BODY>
+</HTML>
