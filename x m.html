@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>小米解析</title>
+		<style type="text/css">
+		    *{
+		    	text-align:center;
+		    	margin:0;
+		    	padding:0;
+		    }
+		    #video_iframe{
+		    	margin-top:1rem;
+		    	width:97%;
+		    	height:21rem;
+		    }
+		    select{
+		    	width:97%;
+		    	margin-top:1rem;
+		    	border-radius:50px;
+		    	padding:0.5rem;
+		    	border:none;
+		    	outline:none;
+		    }
+		    #movie_src{
+		    	width:96%;
+		    	height:2rem;
+		    	margin-top:1rem;
+		    	border-radius:50px;
+		    	border:2px solid #00804c;
+		    	outline:none;
+		    }
+		    #submit_btn{		    	
+		    	width:96%;
+		    	height:2.6rem;
+		    	margin-top:1rem;
+		    	margin-bottom:1rem;
+		    	border-radius:50px;
+		    	background-color:#00804c;
+		    	border-width:0px;
+		    	outline:none; 
+		    	box-shadow: 5px 5px 2px #888888;
+		    }
+		</style>
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	</head>
+	<body>		
+		  <iframe id="video_iframe" src="">
+			</iframe>
+			<p style="border:1px solid #74a8ff;padding:1rem;margin:1rem;">
+			小米提醒您<br/>
+			如有解析失败请更换接口<br/>		
+			请不要相信或点击解析中的任何广告<br/>
+			解析腾讯爱奇艺速度更快<br/>			  
+			<p/>			
+			<input id="movie_src" type="text" placeholder="请输入要解析的视频网址"></input>
+		  <select id="parse_select" onchange="getJk()">
+		   <option value ="https://jx.hezeshi.net/ce/jlexi.php?url=" >接口1</option>
+			  <option value ="http://api.xyingyu.com/?url=" >接口2</option>
+			  <option value ="https://660e.com/?url=">接口3</option>
+			  <option value="http://api.baiyug.vip/index.php?url=">接口4</option>
+			  <option value="http://api.zuilingxian.com/jiexi.php?url=">接口5</option>
+			  <option value="http://jx.bwcxy.com/?v=">接口6</option>
+			  <option value="http://jx.618g.com/?url=">接口7</option>
+			  <option value="http://at520.cn/jx/zxlsj.php?url=">接口8</option>
+			  <option value="https://vip.97kys.com/vip/?url=">接口9</option>
+			  <option value="https://660e.com/?url=">接口10</option>
+			  <option value="https://jx.hezeshi.net/ce/jlexi.php?url=">接口11</option>
+			  <option value="http://jx.2tv.org/?url=">接口12</option>
+			  <option value ="http://s.miluyun.top/?url=" >接口13</option>
+			  <option value="http://api.51ckm.com/Box.php?url=">接口14</option>
+			  	  <option value="http://www.v8dg.com/template/vfed/asset/fed/player.php?url=">接口15</option>
+			  <option value="http://py.ha12.xyz/jxp/?url=">接口16</option>
+		</select>		
+		<button id="submit_btn">~播放~</button>
+		<script type="text/javascript">
+		    var jk;
+		    var url;
+			function getJk(){
+    			jx =$(":selected").attr("value");
+			}
+			
+			getJk()
+			
+			$("#submit_btn").click(function(){
+			    var src = $("#movie_src").val();
+			    if(src.length == 0){
+			    	alert("必须输入视频地址才能解析哦")
+			    	return;
+			    }
+				url = jx + src;
+				$("#video_iframe").attr("src",url);
+			});
+			
+			var parseurl = window.location.href;
+			var tag = "?parseurl=";
+			
+			if(parseurl.indexOf(tag) != -1){
+				src = parseurl.substring(parseurl.lastIndexOf(tag) + tag.length);
+				$("#movie_src").val(src);
+				$("#submit_btn").click();
+			}
+		</script>
+	</body>
+</html>
